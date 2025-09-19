@@ -85,27 +85,7 @@ class Grant_AI_Assistant {
         }
     }
     
-    /**
-     * 依存ファイル読み込み
-     */
-    private function load_dependencies() {
-        // インクルードファイル
-        $includes = array(
-            'includes/ai-engine.php',
-            'includes/ai-chat-section.php'
-        );
-        
-        foreach ($includes as $include) {
-            $file_path = GAA_PLUGIN_PATH . $include;
-            if (file_exists($file_path)) {
-                require_once $file_path;
-            } else {
-                $this->errors['missing_files'][] = $include;
-                add_action('admin_notices', array($this, 'missing_file_notice'));
-            }
-        }
-    }
-    
+
     /**
      * システム要件チェック
      */
@@ -206,14 +186,22 @@ class Grant_AI_Assistant {
             'includes/ai-chat-section.php'
         );
 
+        $missing = array();
+
         foreach ($required_files as $file) {
             $file_path = GAA_PLUGIN_PATH . $file;
             if (file_exists($file_path)) {
                 require_once $file_path;
             } else {
+                $missing[] = $file;
                 $this->log_message("Required file not found: {$file}", 'error');
-                return false;
             }
+        }
+
+        if (!empty($missing)) {
+            $this->errors['missing_files'] = $missing;
+            add_action('admin_notices', array($this, 'missing_file_notice'));
+            return false;
         }
 
         return true;
