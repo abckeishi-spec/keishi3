@@ -29,10 +29,9 @@ $required_files = array(
     '5-template-tags.php',            // テンプレート用関数
     '6-admin-functions.php',          // 管理画面関連
     '7-acf-setup.php',                // ACF関連
-    'performance-helpers.php',        // パフォーマンス最適化ヘルパー
-
-    '9-mobile-optimization.php',     // モバイル最適化機能
-    'acf-fields-setup.php'           // ACFフィールド定義 ✅ 修正
+    '8-acf-fields-setup.php',         // ACFフィールド定義
+    '9-mobile-optimization.php',      // モバイル最適化機能
+    '10-performance-helpers.php'      // パフォーマンス最適化ヘルパー
 );
 
 // 各ファイルを安全に読み込み
@@ -49,7 +48,7 @@ foreach ($required_files as $file) {
 }
 
 // 統一カードレンダラーの読み込み（エラーハンドリング付き）
-$card_renderer_path = get_template_directory() . '/inc/class-grant-card-renderer.php';
+$card_renderer_path = get_template_directory() . '/inc/11-grant-card-renderer.php';
 $card_unified_path = get_template_directory() . '/template-parts/grant-card-unified.php';
 
 if (file_exists($card_renderer_path)) {

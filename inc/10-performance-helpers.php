@@ -165,26 +165,7 @@ function gi_add_lazy_loading($html, $post_id, $size, $attr) {
 }
 add_filter('wp_get_attachment_image', 'gi_add_lazy_loading', 10, 4);
 
-/**
- * WebP画像のサポート
- */
-function gi_webp_support($sources, $size_array, $image_src, $image_meta, $attachment_id) {
-    $upload_dir = wp_upload_dir();
-    $image_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $image_src);
-    $webp_path = preg_replace('/\.(jpe?g|png)$/i', '.webp', $image_path);
-    
-    if (file_exists($webp_path)) {
-        $webp_url = preg_replace('/\.(jpe?g|png)$/i', '.webp', $image_src);
-        $sources[] = array(
-            'url' => $webp_url,
-            'descriptor' => 'type',
-            'value' => 'image/webp',
-        );
-    }
-    
-    return $sources;
-}
-add_filter('wp_calculate_image_srcset', 'gi_webp_support', 10, 5);
+// WebP画像サポート機能は削除されました（未使用のため）
 
 /**
  * キャッシュクリア関数
@@ -211,35 +192,5 @@ function gi_clear_cache_on_post_update($post_id) {
 add_action('save_post', 'gi_clear_cache_on_post_update');
 add_action('delete_post', 'gi_clear_cache_on_post_update');
 
-/**
- * データベースクエリの監視（デバッグ用）
- */
-function gi_query_monitor() {
-    if (defined('WP_DEBUG') && WP_DEBUG && current_user_can('administrator')) {
-        global $wpdb;
-        echo "<!-- Database Queries: " . $wpdb->num_queries . " -->";
-        
-        if (defined('SAVEQUERIES') && SAVEQUERIES) {
-            $slow_queries = array_filter($wpdb->queries, function($query) {
-                return $query[1] > 0.01; // 0.01秒以上のクエリ
-            });
-            
-            if (!empty($slow_queries)) {
-                echo "<!-- Slow Queries: " . count($slow_queries) . " -->";
-            }
-        }
-    }
-}
-add_action('wp_footer', 'gi_query_monitor');
-
-/**
- * メモリ使用量の監視（デバッグ用）
- */
-function gi_memory_monitor() {
-    if (defined('WP_DEBUG') && WP_DEBUG && current_user_can('administrator')) {
-        $memory_usage = memory_get_peak_usage(true) / 1024 / 1024;
-        echo "<!-- Peak Memory Usage: " . round($memory_usage, 2) . " MB -->";
-    }
-}
-add_action('wp_footer', 'gi_memory_monitor');
+// データベースクエリ監視・メモリ監視機能は削除されました（デバッグ用で本番不要のため）
 
