@@ -1,0 +1,1088 @@
+/**
+ * Grant AI Assistant - Chat Styles
+ * AIチャット機能のスタイルシート（既存テーマ完全統合版）
+ * 
+ * @package Grant_AI_Assistant
+ * @version 1.0.0
+ */
+
+/* ========================================
+   基本レイアウト・コンテナ
+======================================== */
+
+.gaa-chat-container {
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    border: 1px solid #e1e5e9;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.gaa-chat-container:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 最小化状態 */
+.gaa-chat-container.gaa-minimized {
+    height: 60px !important;
+    overflow: hidden;
+}
+
+.gaa-chat-container.gaa-minimized .gaa-chat-history,
+.gaa-chat-container.gaa-minimized .gaa-quick-buttons,
+.gaa-chat-container.gaa-minimized .gaa-input-area,
+.gaa-chat-container.gaa-minimized .gaa-results-area,
+.gaa-chat-container.gaa-minimized .gaa-chat-footer {
+    display: none;
+}
+
+/* ========================================
+   ヘッダーエリア
+======================================== */
+
+.gaa-chat-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+}
+
+.gaa-ai-avatar {
+    flex-shrink: 0;
+}
+
+.gaa-avatar-icon {
+    font-size: 48px;
+    line-height: 1;
+    display: block;
+}
+
+.gaa-chat-title {
+    flex: 1;
+}
+
+.gaa-chat-title h3 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.gaa-chat-subtitle {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.gaa-chat-controls {
+    flex-shrink: 0;
+}
+
+.gaa-minimize-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.gaa-minimize-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ========================================
+   チャット履歴エリア
+======================================== */
+
+.gaa-chat-history {
+    height: 400px;
+    overflow-y: auto;
+    padding: 24px;
+    background: #f8fafc;
+    scroll-behavior: smooth;
+}
+
+.gaa-message {
+    display: flex;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: gaa-fadeInUp 0.4s ease-out forwards;
+    position: relative;
+}
+
+.gaa-ai-message {
+    justify-content: flex-start;
+}
+
+.gaa-user-message {
+    justify-content: flex-end;
+}
+
+.gaa-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gaa-ai-message .gaa-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin-right: 12px;
+}
+
+.gaa-user-message .gaa-avatar {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    margin-left: 12px;
+    order: 2;
+}
+
+.gaa-message-content {
+    max-width: 70%;
+    padding: 16px 20px;
+    border-radius: 18px;
+    line-height: 1.6;
+    position: relative;
+}
+
+.gaa-ai-message .gaa-message-content {
+    background: white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 6px;
+    border: 1px solid #e1e5e9;
+}
+
+.gaa-user-message .gaa-message-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom-right-radius: 6px;
+    order: 1;
+}
+
+.gaa-message-content p {
+    margin: 0;
+    font-size: 15px;
+    word-wrap: break-word;
+}
+
+.gaa-message-content p + p {
+    margin-top: 8px;
+}
+
+.gaa-message-time {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 4px;
+    opacity: 0.7;
+    align-self: flex-end;
+}
+
+.gaa-user-message .gaa-message-time {
+    color: rgba(255, 255, 255, 0.8);
+    order: 3;
+}
+
+/* 思考中メッセージ */
+.gaa-thinking-message .gaa-message-content {
+    background: #f1f5f9 !important;
+    color: #64748b;
+    font-style: italic;
+}
+
+.gaa-loading-dots {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.gaa-loading-dots span {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #64748b;
+    margin: 0 1px;
+    animation: gaa-loadingDots 1.4s infinite ease-in-out;
+}
+
+.gaa-loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.gaa-loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+/* ========================================
+   クイック選択ボタン
+======================================== */
+
+.gaa-quick-buttons {
+    padding: 0 24px 24px;
+    background: #f8fafc;
+}
+
+.gaa-quick-buttons-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.gaa-quick-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px;
+}
+
+.gaa-quick-btn {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    min-height: 48px;
+}
+
+.gaa-quick-btn:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.gaa-quick-btn-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.gaa-quick-btn-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ========================================
+   入力エリア
+======================================== */
+
+.gaa-input-area {
+    padding: 24px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+}
+
+.gaa-input-container {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.gaa-input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.gaa-message-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 25px;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    line-height: 1.4;
+    min-height: 56px;
+    overflow-y: hidden;
+}
+
+.gaa-message-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.gaa-input-counter {
+    position: absolute;
+    right: 12px;
+    bottom: 6px;
+    font-size: 12px;
+    color: #64748b;
+    pointer-events: none;
+}
+
+.gaa-input-counter.gaa-warning {
+    color: #f59e0b;
+}
+
+.gaa-input-counter.gaa-danger {
+    color: #ef4444;
+}
+
+.gaa-send-button {
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 100px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.gaa-send-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.gaa-send-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.gaa-send-button.gaa-processing {
+    background: #94a3b8;
+}
+
+.gaa-send-icon {
+    font-size: 18px;
+}
+
+.gaa-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: gaa-spin 1s linear infinite;
+}
+
+/* 入力ヒント */
+.gaa-input-hints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+}
+
+.gaa-hint-item {
+    font-size: 12px;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 12px;
+}
+
+/* ========================================
+   結果表示エリア
+======================================== */
+
+.gaa-results-area {
+    padding: 24px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+
+.gaa-results-title {
+    text-align: center;
+    color: #1e293b;
+    margin: 0 0 24px 0;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gaa-grants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.gaa-grant-card-wrapper {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease-out;
+}
+
+.gaa-grant-card-wrapper.gaa-card-animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 既存テーマカードとの統合スタイル */
+.gaa-grant-card-wrapper .grant-card-unified,
+.gaa-grant-card-wrapper .grant-card-enhanced,
+.gaa-grant-card-wrapper .grant-card {
+    margin-bottom: 0;
+    width: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gaa-grant-card-wrapper:hover .grant-card-unified,
+.gaa-grant-card-wrapper:hover .grant-card-enhanced,
+.gaa-grant-card-wrapper:hover .grant-card {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* シンプルカードフォールバック */
+.gaa-grant-card-simple {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e5e9;
+    transition: all 0.2s ease;
+}
+
+.gaa-grant-card-simple:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.gaa-card-title {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.gaa-card-title a {
+    color: #1e293b;
+    text-decoration: none;
+}
+
+.gaa-card-title a:hover {
+    color: #667eea;
+}
+
+.gaa-card-org {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 16px;
+}
+
+.gaa-card-excerpt {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #475569;
+    margin-bottom: 16px;
+}
+
+.gaa-card-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.gaa-card-amount,
+.gaa-card-deadline {
+    color: #64748b;
+}
+
+.gaa-card-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.gaa-card-button:hover {
+    background: #5a6fd8;
+}
+
+/* 結果なし表示 */
+.gaa-no-results {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gaa-no-results-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.gaa-no-results h3 {
+    color: #334155;
+    margin: 0 0 16px 0;
+    font-size: 20px;
+}
+
+.gaa-no-results p {
+    color: #64748b;
+    margin: 0 0 24px 0;
+    line-height: 1.6;
+}
+
+.gaa-retry-search-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gaa-retry-search-btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   フォローアップ質問
+======================================== */
+
+.gaa-follow-up {
+    margin-top: 32px;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e5e9;
+}
+
+.gaa-follow-up-title {
+    margin: 0 0 16px 0;
+    font-weight: 600;
+    color: #334155;
+    text-align: center;
+}
+
+.gaa-follow-up-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.gaa-follow-up-btn {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0;
+    animation: gaa-fadeInUp 0.4s ease-out forwards;
+}
+
+.gaa-follow-up-btn:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   フッターエリア
+======================================== */
+
+.gaa-chat-footer {
+    padding: 16px 24px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.gaa-disclaimer {
+    flex: 1;
+    min-width: 250px;
+}
+
+.gaa-powered-by {
+    text-align: right;
+}
+
+.gaa-disclaimer small,
+.gaa-powered-by small {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* ========================================
+   通知システム
+======================================== */
+
+.gaa-notification {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: white;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e1e5e9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+    max-width: 320px;
+    animation: gaa-slideInRight 0.3s ease-out;
+}
+
+.gaa-notification-info {
+    border-left: 4px solid #3b82f6;
+}
+
+.gaa-notification-warning {
+    border-left: 4px solid #f59e0b;
+}
+
+.gaa-notification-error {
+    border-left: 4px solid #ef4444;
+}
+
+.gaa-notification-success {
+    border-left: 4px solid #10b981;
+}
+
+.gaa-notification-text {
+    flex: 1;
+    font-size: 14px;
+    color: #374151;
+}
+
+.gaa-notification-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========================================
+   テーマバリエーション
+======================================== */
+
+/* ダークテーマ */
+.gaa-theme-dark {
+    background: #1e293b;
+    color: #f1f5f9;
+    border-color: #334155;
+}
+
+.gaa-theme-dark .gaa-chat-history {
+    background: #0f172a;
+}
+
+.gaa-theme-dark .gaa-ai-message .gaa-message-content {
+    background: #334155;
+    color: #f1f5f9;
+    border-color: #475569;
+}
+
+.gaa-theme-dark .gaa-message-input {
+    background: #334155;
+    color: #f1f5f9;
+    border-color: #475569;
+}
+
+.gaa-theme-dark .gaa-message-input:focus {
+    border-color: #667eea;
+}
+
+.gaa-theme-dark .gaa-quick-btn {
+    background: #334155;
+    color: #f1f5f9;
+    border-color: #475569;
+}
+
+/* ========================================
+   エラー・特別状態
+======================================== */
+
+.gaa-notice {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14px;
+}
+
+.gaa-notice-info {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #93c5fd;
+}
+
+.gaa-notice-warning {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}
+
+.gaa-notice-error {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+}
+
+.gaa-fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+/* ========================================
+   アニメーション定義
+======================================== */
+
+@keyframes gaa-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gaa-slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes gaa-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gaa-loadingDots {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   ユーティリティクラス
+======================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.gaa-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========================================
+   レスポンシブ対応
+======================================== */
+
+@media (max-width: 768px) {
+    .gaa-chat-container {
+        margin: 0 16px 2rem 16px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+    
+    .gaa-chat-header {
+        padding: 16px 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .gaa-avatar-icon {
+        font-size: 36px;
+    }
+    
+    .gaa-chat-title h3 {
+        font-size: 20px;
+    }
+    
+    .gaa-chat-subtitle {
+        font-size: 14px;
+    }
+    
+    .gaa-chat-history {
+        height: 300px;
+        padding: 16px;
+    }
+    
+    .gaa-message-content {
+        max-width: 85%;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .gaa-quick-buttons {
+        padding: 0 16px 16px;
+    }
+    
+    .gaa-quick-buttons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 8px;
+    }
+    
+    .gaa-quick-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+        min-height: 44px;
+    }
+    
+    .gaa-input-area {
+        padding: 16px;
+    }
+    
+    .gaa-input-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .gaa-message-input {
+        padding: 14px 16px;
+        font-size: 16px; /* iOS ズームを防ぐため */
+    }
+    
+    .gaa-send-button {
+        width: 100%;
+        padding: 14px 20px;
+        height: 52px;
+    }
+    
+    .gaa-results-area {
+        padding: 16px;
+    }
+    
+    .gaa-grants-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .gaa-follow-up {
+        padding: 16px;
+        margin-top: 16px;
+    }
+    
+    .gaa-follow-up-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .gaa-follow-up-btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+    
+    .gaa-chat-footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px 16px;
+    }
+    
+    .gaa-notification {
+        right: 8px;
+        left: 8px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .gaa-chat-container {
+        margin: 0 8px 2rem 8px;
+    }
+    
+    .gaa-chat-header {
+        padding: 12px 16px;
+    }
+    
+    .gaa-avatar-icon {
+        font-size: 32px;
+    }
+    
+    .gaa-chat-title h3 {
+        font-size: 18px;
+    }
+    
+    .gaa-quick-buttons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gaa-input-hints {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .gaa-results-title {
+        font-size: 18px;
+        padding: 12px;
+    }
+}
+
+/* ========================================
+   印刷対応
+======================================== */
+
+@media print {
+    .gaa-chat-container {
+        box-shadow: none;
+        border: 2px solid #000;
+    }
+    
+    .gaa-chat-header {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+    }
+    
+    .gaa-input-area,
+    .gaa-quick-buttons,
+    .gaa-chat-controls {
+        display: none;
+    }
+}
+
+/* ========================================
+   アクセシビリティ対応
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .gaa-chat-container,
+    .gaa-message,
+    .gaa-quick-btn,
+    .gaa-send-button,
+    .gaa-grant-card-wrapper {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ハイコントラストモード */
+@media (prefers-contrast: high) {
+    .gaa-chat-container {
+        border: 2px solid #000;
+    }
+    
+    .gaa-message-content {
+        border: 1px solid #000;
+    }
+    
+    .gaa-quick-btn,
+    .gaa-send-button {
+        border: 2px solid #000;
+    }
+}
+
+/* フォーカス表示の強化 */
+.gaa-message-input:focus,
+.gaa-send-button:focus,
+.gaa-quick-btn:focus,
+.gaa-follow-up-btn:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* ========================================
+   スクロールバーのスタイリング
+======================================== */
+
+.gaa-chat-history::-webkit-scrollbar {
+    width: 6px;
+}
+
+.gaa-chat-history::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.gaa-chat-history::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.gaa-chat-history::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Firefox用 */
+.gaa-chat-history {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
