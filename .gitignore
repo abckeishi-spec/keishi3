@@ -1,0 +1,75 @@
+# WordPress プラグイン用 .gitignore
+
+# 依存関係
+node_modules/
+vendor/
+
+# ログファイル
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# 環境設定ファイル
+.env
+.env.local
+.env.*.local
+
+# APIキーとシークレット
+secrets.json
+config/secrets.php
+wp-config-local.php
+
+# 一時ファイル
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDEファイル
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ビルド成果物
+dist/
+build/
+.cache/
+
+# テストファイル
+coverage/
+.nyc_output/
+phpunit.xml
+.phpunit.result.cache
+
+# パッケージ管理
+composer.lock
+package-lock.json
+yarn.lock
+
+# WordPressファイル
+wp-config.php
+.htaccess
+sitemap.xml
+
+# データベース
+*.sql
+*.sqlite
+*.db
+
+# バックアップ
+*.backup
+*.bak
+*.old
+
+# 圧縮ファイル
+*.zip
+*.tar.gz
+*.rar
+
+# その他
+error_log
+debug.log
