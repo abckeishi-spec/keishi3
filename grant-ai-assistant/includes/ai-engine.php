@@ -9,7 +9,7 @@
 
 // セキュリティチェック
 if (!defined('ABSPATH')) {
-    exit('Direct access forbidden.');
+    exit;
 }
 
 /**
@@ -23,12 +23,13 @@ class Grant_AI_Engine {
      */
     public static function handle_chat_message() {
         // nonce検証
-        if (!wp_verify_nonce($_POST['nonce'] ?? '', 'gaa_chat_nonce')) {
+        $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
+        if (!wp_verify_nonce($nonce, 'gaa_chat_nonce')) {
             wp_send_json_error(__('セキュリティチェックに失敗しました', GAA_TEXT_DOMAIN));
             return;
         }
         
-        $user_message = sanitize_text_field($_POST['message'] ?? '');
+        $user_message = isset($_POST['message']) ? sanitize_text_field($_POST['message']) : '';
         $conversation_history = isset($_POST['history']) ? json_decode(stripslashes($_POST['history']), true) : array();
         
         if (empty($user_message)) {
@@ -55,11 +56,11 @@ class Grant_AI_Engine {
                 'success' => true,
                 'message' => $ai_analysis['response_message'],
                 'grants' => $matching_grants,
-                'suggestions' => $ai_analysis['follow_up_questions'] ?? array(),
-                'intent' => $ai_analysis['intent'] ?? array(),
+                'suggestions' => isset($ai_analysis['follow_up_questions']) ? $ai_analysis['follow_up_questions'] : array(),
+                'intent' => isset($ai_analysis['intent']) ? $ai_analysis['intent'] : array(),
                 'search_info' => array(
                     'total_found' => count($matching_grants),
-                    'search_keywords' => $ai_analysis['intent']['search_keywords'] ?? array()
+                    'search_keywords' => isset($ai_analysis['intent']['search_keywords']) ? $ai_analysis['intent']['search_keywords'] : array()
                 )
             );
 
@@ -68,7 +69,7 @@ class Grant_AI_Engine {
                 $response['debug'] = array(
                     'user_message' => $user_message,
                     'ai_analysis' => $ai_analysis,
-                    'search_query_used' => self::$last_search_query ?? 'N/A'
+                    'search_query_used' => isset(self::$last_search_query) ? self::$last_search_query : 'N/A'
                 );
             }
             
@@ -203,10 +204,13 @@ class Grant_AI_Engine {
             $parsed = json_decode($json_string, true);
             
             if (json_last_error() === JSON_ERROR_NONE && is_array($parsed)) {
+                $response_message = isset($parsed['response_message']) ? $parsed['response_message'] : __('ご質問いただき、ありがとうございます。最適な助成金を検索いたします。', GAA_TEXT_DOMAIN);
+                $follow_up_questions = isset($parsed['follow_up_questions']) ? $parsed['follow_up_questions'] : array();
+                
                 return array(
                     'intent' => $parsed,
-                    'response_message' => $parsed['response_message'] ?? __('ご質問いただき、ありがとうございます。最適な助成金を検索いたします。', GAA_TEXT_DOMAIN),
-                    'follow_up_questions' => $parsed['follow_up_questions'] ?? array()
+                    'response_message' => $response_message,
+                    'follow_up_questions' => $follow_up_questions
                 );
             }
         }
@@ -254,7 +258,7 @@ class Grant_AI_Engine {
      * 助成金データベース検索
      */
     private static function search_matching_grants($ai_analysis) {
-        $intent = $ai_analysis['intent'] ?? array();
+        $intent = isset($ai_analysis['intent']) ? $ai_analysis['intent'] : array();
         $max_results = get_option('gaa_max_results', 6);
         
         // 基本検索クエリ構築
@@ -482,7 +486,7 @@ class Grant_AI_Engine {
         );
 
         // 事業種別からterm取得
-        $business_type = $intent['business_type'] ?? '';
+        $business_type = isset($intent['business_type']) ? $intent['business_type'] : '';
         foreach ($business_mapping as $key => $taxonomy_terms) {
             if (strpos($business_type, $key) !== false) {
                 $terms = array_merge($terms, $taxonomy_terms);
@@ -490,7 +494,7 @@ class Grant_AI_Engine {
         }
 
         // 目的からterm取得
-        $purpose = $intent['purpose'] ?? '';
+        $purpose = isset($intent['purpose']) ? $intent['purpose'] : '';
         foreach ($purpose_mapping as $key => $taxonomy_terms) {
             if (strpos($purpose, $key) !== false) {
                 $terms = array_merge($terms, $taxonomy_terms);
@@ -498,7 +502,7 @@ class Grant_AI_Engine {
         }
 
         // 検索キーワードからも抽出
-        $search_keywords = $intent['search_keywords'] ?? array();
+        $search_keywords = isset($intent['search_keywords']) ? $intent['search_keywords'] : array();
         foreach ($search_keywords as $keyword) {
             foreach ($business_mapping as $category => $taxonomy_terms) {
                 if (strpos($keyword, $category) !== false) {

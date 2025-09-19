@@ -2,17 +2,17 @@
 /**
  * Plugin Name: Grant AI Assistant
  * Description: AI対話型助成金検索機能 - Grant Insight Perfectテーマ専用統合プラグイン
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Grant Insight Team
  * Requires at least: 5.8
- * Requires PHP: 7.4
+ * Requires PHP: 7.0
  * Text Domain: grant-ai-assistant
  * Domain Path: /languages
  */
 
 // セキュリティチェック
 if (!defined('ABSPATH')) {
-    exit('Direct access forbidden.');
+    exit;
 }
 
 // 定数定義
@@ -246,9 +246,12 @@ class Grant_AI_Assistant {
      * 設定保存処理
      */
     private function save_settings() {
-        update_option('gaa_openai_api_key', sanitize_text_field($_POST['openai_api_key'] ?? ''));
+        $api_key = isset($_POST['openai_api_key']) ? sanitize_text_field($_POST['openai_api_key']) : '';
+        $max_results = isset($_POST['max_results']) ? intval($_POST['max_results']) : 6;
+        
+        update_option('gaa_openai_api_key', $api_key);
         update_option('gaa_enable_chat', isset($_POST['enable_chat']));
-        update_option('gaa_max_results', intval($_POST['max_results'] ?? 6));
+        update_option('gaa_max_results', $max_results);
         update_option('gaa_debug_mode', isset($_POST['debug_mode']));
     }
 
@@ -456,10 +459,11 @@ class Grant_AI_Assistant {
     }
 }
 
-// プラグイン初期化
-add_action('plugins_loaded', function() {
+// プラグイン初期化（より安全な方法）
+function gaa_init_plugin() {
     Grant_AI_Assistant::get_instance();
-});
+}
+add_action('plugins_loaded', 'gaa_init_plugin');
 
 /**
  * アンインストール時のクリーンアップ

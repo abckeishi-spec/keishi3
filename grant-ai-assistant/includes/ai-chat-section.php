@@ -9,7 +9,7 @@
 
 // セキュリティチェック
 if (!defined('ABSPATH')) {
-    exit('Direct access forbidden.');
+    exit;
 }
 
 /**
