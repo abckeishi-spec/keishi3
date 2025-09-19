@@ -1,75 +1,213 @@
-# WordPress プラグイン用 .gitignore
+# WordPress Plugin Grant AI Assistant Pro
+# エンタープライズ レベル .gitignore
 
-# 依存関係
+# Node.js dependencies
 node_modules/
-vendor/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# ログファイル
-*.log
-logs/
+# Runtime data
+pids
 *.pid
 *.seed
 *.pid.lock
 
-# 環境設定ファイル
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Environment variables
 .env
 .env.local
-.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.build
 
-# APIキーとシークレット
-secrets.json
-config/secrets.php
-wp-config-local.php
+# Parcel-bundler cache
+.cache
+.parcel-cache
 
-# 一時ファイル
-*.tmp
-*.temp
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Runtime configuration files
+*.log
+*.log.*
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# IDEファイル
+# IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# ビルド成果物
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Compressed files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# WordPress specific
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/backup-db/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cache/
+wp-content/cache/supercache/
+
+# Plugin specific - Grant AI Assistant Pro
+# 機密情報を含むファイル
+*api-keys.txt
+*secrets.txt
+*credentials.json
+*.pem
+*.key
+
+# 開発用ファイル
+*.dev.php
+*.test.php
+debug.log
+error.log
+
+# ビルドファイル
+assets/*.min.js
+assets/*.min.css
+assets/build/
 dist/
-build/
+
+# 一時ファイル
+*.tmp
+*.temp
+.htaccess.bak
+
+# キャッシュファイル
+*.cache
+cache/
 .cache/
 
-# テストファイル
-coverage/
-.nyc_output/
-phpunit.xml
-.phpunit.result.cache
+# データベースファイル
+*.sql
+*.db
+*.sqlite
 
-# パッケージ管理
+# 設定ファイル（本番用）
+config/production.php
+config/staging.php
+
+# ログファイル
+logs/
+*.log
+error_log
+access_log
+
+# アップロードファイル
+uploads/
+files/
+media/
+
+# セッションファイル  
+sessions/
+tmp/sessions/
+
+# 自動生成ファイル
+auto-generated/
+generated/
+build-output/
+
+# テストファイル
+phpunit.xml
+tests/coverage/
+coverage.xml
+
+# Composer
+vendor/
+composer.phar
 composer.lock
+
+# Package managers
 package-lock.json
 yarn.lock
 
-# WordPressファイル
-wp-config.php
+# Documentation build
+docs/_build/
+docs/.doctrees/
+
+# Deployment
+deploy.sh
+deploy/
+.deployment
+
+# Security
 .htaccess
-sitemap.xml
-
-# データベース
-*.sql
-*.sqlite
-*.db
-
-# バックアップ
-*.backup
-*.bak
-*.old
-
-# 圧縮ファイル
-*.zip
-*.tar.gz
-*.rar
-
-# その他
-error_log
-debug.log
+.htpasswd
+robots.txt.bak

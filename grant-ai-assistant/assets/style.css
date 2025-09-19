@@ -1,0 +1,1199 @@
+/*!
+ * Grant AI Assistant Pro - Enterprise CSS Framework v2.1.0
+ * Next-generation AI-powered Grant Search Platform
+ * Copyright (c) 2024 Grant Insight Team
+ * License: GPL v3 or later
+ */
+
+/* =======================
+   CSS Custom Properties (CSS Variables)
+   ======================= */
+:root {
+  /* Color System - Enterprise Brand Palette */
+  --gaap-primary: #2563eb;        /* Primary Blue */
+  --gaap-primary-light: #3b82f6;  /* Light Primary */
+  --gaap-primary-dark: #1d4ed8;   /* Dark Primary */
+  --gaap-secondary: #64748b;      /* Secondary Gray */
+  --gaap-accent: #06d6a0;         /* Success Green */
+  --gaap-warning: #f59e0b;        /* Warning Amber */
+  --gaap-danger: #ef4444;         /* Error Red */
+  --gaap-info: #0ea5e9;           /* Info Sky */
+  
+  /* Neutral Colors */
+  --gaap-white: #ffffff;
+  --gaap-gray-50: #f8fafc;
+  --gaap-gray-100: #f1f5f9;
+  --gaap-gray-200: #e2e8f0;
+  --gaap-gray-300: #cbd5e1;
+  --gaap-gray-400: #94a3b8;
+  --gaap-gray-500: #64748b;
+  --gaap-gray-600: #475569;
+  --gaap-gray-700: #334155;
+  --gaap-gray-800: #1e293b;
+  --gaap-gray-900: #0f172a;
+  
+  /* Typography System */
+  --gaap-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --gaap-font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  
+  /* Font Sizes - Modular Scale */
+  --gaap-text-xs: 0.75rem;       /* 12px */
+  --gaap-text-sm: 0.875rem;      /* 14px */
+  --gaap-text-base: 1rem;        /* 16px */
+  --gaap-text-lg: 1.125rem;      /* 18px */
+  --gaap-text-xl: 1.25rem;       /* 20px */
+  --gaap-text-2xl: 1.5rem;       /* 24px */
+  --gaap-text-3xl: 1.875rem;     /* 30px */
+  --gaap-text-4xl: 2.25rem;      /* 36px */
+  
+  /* Spacing System - 8px base grid */
+  --gaap-space-1: 0.25rem;       /* 4px */
+  --gaap-space-2: 0.5rem;        /* 8px */
+  --gaap-space-3: 0.75rem;       /* 12px */
+  --gaap-space-4: 1rem;          /* 16px */
+  --gaap-space-5: 1.25rem;       /* 20px */
+  --gaap-space-6: 1.5rem;        /* 24px */
+  --gaap-space-8: 2rem;          /* 32px */
+  --gaap-space-10: 2.5rem;       /* 40px */
+  --gaap-space-12: 3rem;         /* 48px */
+  --gaap-space-16: 4rem;         /* 64px */
+  
+  /* Border Radius */
+  --gaap-radius-sm: 0.125rem;     /* 2px */
+  --gaap-radius: 0.25rem;         /* 4px */
+  --gaap-radius-md: 0.375rem;     /* 6px */
+  --gaap-radius-lg: 0.5rem;       /* 8px */
+  --gaap-radius-xl: 0.75rem;      /* 12px */
+  --gaap-radius-2xl: 1rem;        /* 16px */
+  --gaap-radius-full: 9999px;
+  
+  /* Shadows - Elevation System */
+  --gaap-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --gaap-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --gaap-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --gaap-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --gaap-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --gaap-transition-fast: 150ms ease-in-out;
+  --gaap-transition-normal: 300ms ease-in-out;
+  --gaap-transition-slow: 500ms ease-in-out;
+  
+  /* Z-Index Scale */
+  --gaap-z-dropdown: 1000;
+  --gaap-z-sticky: 1020;
+  --gaap-z-fixed: 1030;
+  --gaap-z-modal-backdrop: 1040;
+  --gaap-z-modal: 1050;
+  --gaap-z-popover: 1060;
+  --gaap-z-tooltip: 1070;
+  --gaap-z-toast: 1080;
+}
+
+/* =======================
+   Base & Reset Styles
+   ======================= */
+.gaap-container {
+  font-family: var(--gaap-font-family);
+  font-size: var(--gaap-text-base);
+  line-height: 1.6;
+  color: var(--gaap-gray-700);
+  background-color: var(--gaap-white);
+}
+
+.gaap-container *,
+.gaap-container *::before,
+.gaap-container *::after {
+  box-sizing: border-box;
+}
+
+/* =======================
+   Layout Components
+   ======================= */
+
+/* Admin Dashboard Layout */
+.gaap-admin-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--gaap-space-6);
+}
+
+.gaap-admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--gaap-space-8);
+  padding-bottom: var(--gaap-space-6);
+  border-bottom: 2px solid var(--gaap-gray-100);
+}
+
+.gaap-admin-title {
+  font-size: var(--gaap-text-3xl);
+  font-weight: 700;
+  color: var(--gaap-gray-900);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--gaap-space-3);
+}
+
+.gaap-admin-title::before {
+  content: "🤖";
+  font-size: var(--gaap-text-2xl);
+}
+
+.gaap-version-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--gaap-space-1) var(--gaap-space-3);
+  background: linear-gradient(135deg, var(--gaap-primary), var(--gaap-primary-light));
+  color: var(--gaap-white);
+  font-size: var(--gaap-text-xs);
+  font-weight: 600;
+  border-radius: var(--gaap-radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Grid System */
+.gaap-grid {
+  display: grid;
+  gap: var(--gaap-space-6);
+}
+
+.gaap-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.gaap-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gaap-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gaap-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 768px) {
+  .gaap-grid-cols-2,
+  .gaap-grid-cols-3,
+  .gaap-grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =======================
+   Card Components
+   ======================= */
+.gaap-card {
+  background: var(--gaap-white);
+  border-radius: var(--gaap-radius-lg);
+  box-shadow: var(--gaap-shadow);
+  border: 1px solid var(--gaap-gray-200);
+  overflow: hidden;
+  transition: all var(--gaap-transition-normal);
+}
+
+.gaap-card:hover {
+  box-shadow: var(--gaap-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.gaap-card-header {
+  padding: var(--gaap-space-6);
+  border-bottom: 1px solid var(--gaap-gray-100);
+  background: var(--gaap-gray-50);
+}
+
+.gaap-card-title {
+  font-size: var(--gaap-text-lg);
+  font-weight: 600;
+  color: var(--gaap-gray-900);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--gaap-space-2);
+}
+
+.gaap-card-content {
+  padding: var(--gaap-space-6);
+}
+
+.gaap-card-footer {
+  padding: var(--gaap-space-4) var(--gaap-space-6);
+  background: var(--gaap-gray-50);
+  border-top: 1px solid var(--gaap-gray-100);
+}
+
+/* Stats Cards */
+.gaap-stat-card {
+  background: linear-gradient(135deg, var(--gaap-white) 0%, var(--gaap-gray-50) 100%);
+  border-left: 4px solid var(--gaap-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.gaap-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, var(--gaap-primary) 0%, transparent 70%);
+  opacity: 0.05;
+  transform: translate(30px, -30px);
+}
+
+.gaap-stat-value {
+  font-size: var(--gaap-text-3xl);
+  font-weight: 700;
+  color: var(--gaap-primary);
+  margin-bottom: var(--gaap-space-2);
+}
+
+.gaap-stat-label {
+  font-size: var(--gaap-text-sm);
+  color: var(--gaap-gray-600);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.gaap-stat-trend {
+  font-size: var(--gaap-text-xs);
+  margin-top: var(--gaap-space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--gaap-space-1);
+}
+
+.gaap-trend-up {
+  color: var(--gaap-accent);
+}
+
+.gaap-trend-down {
+  color: var(--gaap-danger);
+}
+
+/* =======================
+   Button System
+   ======================= */
+.gaap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gaap-space-2);
+  padding: var(--gaap-space-3) var(--gaap-space-4);
+  font-size: var(--gaap-text-sm);
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--gaap-radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--gaap-transition-fast);
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.gaap-btn:focus {
+  outline: 2px solid var(--gaap-primary);
+  outline-offset: 2px;
+}
+
+.gaap-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+.gaap-btn-primary {
+  background: linear-gradient(135deg, var(--gaap-primary), var(--gaap-primary-light));
+  color: var(--gaap-white);
+  box-shadow: var(--gaap-shadow-sm);
+}
+
+.gaap-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--gaap-primary-dark), var(--gaap-primary));
+  box-shadow: var(--gaap-shadow-md);
+  transform: translateY(-1px);
+}
+
+.gaap-btn-secondary {
+  background: var(--gaap-white);
+  color: var(--gaap-gray-700);
+  border-color: var(--gaap-gray-300);
+}
+
+.gaap-btn-secondary:hover:not(:disabled) {
+  background: var(--gaap-gray-50);
+  border-color: var(--gaap-gray-400);
+}
+
+.gaap-btn-success {
+  background: linear-gradient(135deg, var(--gaap-accent), #10b981);
+  color: var(--gaap-white);
+}
+
+.gaap-btn-warning {
+  background: linear-gradient(135deg, var(--gaap-warning), #f97316);
+  color: var(--gaap-white);
+}
+
+.gaap-btn-danger {
+  background: linear-gradient(135deg, var(--gaap-danger), #dc2626);
+  color: var(--gaap-white);
+}
+
+/* Button Sizes */
+.gaap-btn-sm {
+  padding: var(--gaap-space-2) var(--gaap-space-3);
+  font-size: var(--gaap-text-xs);
+}
+
+.gaap-btn-lg {
+  padding: var(--gaap-space-4) var(--gaap-space-6);
+  font-size: var(--gaap-text-lg);
+}
+
+.gaap-btn-xl {
+  padding: var(--gaap-space-5) var(--gaap-space-8);
+  font-size: var(--gaap-text-xl);
+}
+
+/* =======================
+   Form Components
+   ======================= */
+.gaap-form-group {
+  margin-bottom: var(--gaap-space-5);
+}
+
+.gaap-label {
+  display: block;
+  font-size: var(--gaap-text-sm);
+  font-weight: 500;
+  color: var(--gaap-gray-700);
+  margin-bottom: var(--gaap-space-2);
+}
+
+.gaap-label.required::after {
+  content: " *";
+  color: var(--gaap-danger);
+}
+
+.gaap-input,
+.gaap-select,
+.gaap-textarea {
+  width: 100%;
+  padding: var(--gaap-space-3);
+  border: 1px solid var(--gaap-gray-300);
+  border-radius: var(--gaap-radius-md);
+  font-size: var(--gaap-text-base);
+  transition: all var(--gaap-transition-fast);
+  background-color: var(--gaap-white);
+}
+
+.gaap-input:focus,
+.gaap-select:focus,
+.gaap-textarea:focus {
+  outline: none;
+  border-color: var(--gaap-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.gaap-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.gaap-input-group {
+  position: relative;
+}
+
+.gaap-input-icon {
+  position: absolute;
+  left: var(--gaap-space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gaap-gray-400);
+  font-size: var(--gaap-text-lg);
+}
+
+.gaap-input-group .gaap-input {
+  padding-left: var(--gaap-space-10);
+}
+
+/* Form Validation */
+.gaap-input.error,
+.gaap-select.error,
+.gaap-textarea.error {
+  border-color: var(--gaap-danger);
+}
+
+.gaap-error-message {
+  margin-top: var(--gaap-space-1);
+  font-size: var(--gaap-text-xs);
+  color: var(--gaap-danger);
+}
+
+.gaap-help-text {
+  margin-top: var(--gaap-space-1);
+  font-size: var(--gaap-text-xs);
+  color: var(--gaap-gray-500);
+}
+
+/* =======================
+   Chat Interface
+   ======================= */
+.gaap-chat-container {
+  background: var(--gaap-white);
+  border-radius: var(--gaap-radius-xl);
+  box-shadow: var(--gaap-shadow-xl);
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid var(--gaap-gray-200);
+}
+
+.gaap-chat-header {
+  background: linear-gradient(135deg, var(--gaap-primary), var(--gaap-primary-light));
+  color: var(--gaap-white);
+  padding: var(--gaap-space-4) var(--gaap-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: between;
+  position: relative;
+}
+
+.gaap-chat-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="0.5" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="1.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+}
+
+.gaap-chat-title {
+  font-size: var(--gaap-text-lg);
+  font-weight: 600;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.gaap-chat-status {
+  font-size: var(--gaap-text-xs);
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--gaap-space-2);
+}
+
+.gaap-status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gaap-accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.gaap-chat-messages {
+  height: 400px;
+  overflow-y: auto;
+  padding: var(--gaap-space-4);
+  background: linear-gradient(to bottom, var(--gaap-gray-50), var(--gaap-white));
+  scroll-behavior: smooth;
+}
+
+.gaap-message {
+  display: flex;
+  margin-bottom: var(--gaap-space-4);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gaap-message-user {
+  justify-content: flex-end;
+}
+
+.gaap-message-bubble {
+  max-width: 80%;
+  padding: var(--gaap-space-3) var(--gaap-space-4);
+  border-radius: var(--gaap-radius-lg);
+  position: relative;
+}
+
+.gaap-message-user .gaap-message-bubble {
+  background: linear-gradient(135deg, var(--gaap-primary), var(--gaap-primary-light));
+  color: var(--gaap-white);
+  border-bottom-right-radius: var(--gaap-radius-sm);
+}
+
+.gaap-message-assistant .gaap-message-bubble {
+  background: var(--gaap-white);
+  color: var(--gaap-gray-700);
+  border: 1px solid var(--gaap-gray-200);
+  border-bottom-left-radius: var(--gaap-radius-sm);
+  box-shadow: var(--gaap-shadow-sm);
+}
+
+.gaap-message-time {
+  font-size: var(--gaap-text-xs);
+  opacity: 0.7;
+  margin-top: var(--gaap-space-1);
+  text-align: right;
+}
+
+.gaap-message-assistant .gaap-message-time {
+  text-align: left;
+}
+
+.gaap-typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--gaap-space-2);
+  padding: var(--gaap-space-3) var(--gaap-space-4);
+  background: var(--gaap-gray-100);
+  border-radius: var(--gaap-radius-lg);
+  margin-bottom: var(--gaap-space-4);
+}
+
+.gaap-typing-dots {
+  display: flex;
+  gap: var(--gaap-space-1);
+}
+
+.gaap-typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gaap-gray-400);
+  animation: typingDots 1.4s infinite ease-in-out;
+}
+
+.gaap-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.gaap-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingDots {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.gaap-chat-input-area {
+  padding: var(--gaap-space-4);
+  background: var(--gaap-white);
+  border-top: 1px solid var(--gaap-gray-200);
+}
+
+.gaap-chat-input-group {
+  display: flex;
+  gap: var(--gaap-space-3);
+  align-items: flex-end;
+}
+
+.gaap-chat-input {
+  flex: 1;
+  border-radius: var(--gaap-radius-lg);
+  min-height: 44px;
+  resize: none;
+  padding: var(--gaap-space-3);
+}
+
+.gaap-chat-send-btn {
+  border-radius: var(--gaap-radius-lg);
+  padding: var(--gaap-space-3);
+  min-width: 44px;
+  height: 44px;
+}
+
+/* Voice Input Button */
+.gaap-voice-btn {
+  border-radius: var(--gaap-radius-lg);
+  padding: var(--gaap-space-3);
+  width: 44px;
+  height: 44px;
+  background: var(--gaap-gray-100);
+  border: 1px solid var(--gaap-gray-300);
+  color: var(--gaap-gray-600);
+  transition: all var(--gaap-transition-fast);
+}
+
+.gaap-voice-btn:hover {
+  background: var(--gaap-gray-200);
+}
+
+.gaap-voice-btn.recording {
+  background: var(--gaap-danger);
+  color: var(--gaap-white);
+  animation: recordingPulse 1s infinite;
+}
+
+@keyframes recordingPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* =======================
+   Alert System
+   ======================= */
+.gaap-alert {
+  padding: var(--gaap-space-4);
+  border-radius: var(--gaap-radius-md);
+  margin-bottom: var(--gaap-space-4);
+  border-left: 4px solid;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gaap-space-3);
+}
+
+.gaap-alert-icon {
+  font-size: var(--gaap-text-lg);
+  margin-top: 2px;
+}
+
+.gaap-alert-content {
+  flex: 1;
+}
+
+.gaap-alert-title {
+  font-weight: 600;
+  margin-bottom: var(--gaap-space-1);
+}
+
+.gaap-alert-message {
+  margin: 0;
+  font-size: var(--gaap-text-sm);
+}
+
+/* Alert Variants */
+.gaap-alert-success {
+  background: rgba(6, 214, 160, 0.1);
+  border-left-color: var(--gaap-accent);
+  color: var(--gaap-gray-700);
+}
+
+.gaap-alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-left-color: var(--gaap-warning);
+  color: var(--gaap-gray-700);
+}
+
+.gaap-alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  border-left-color: var(--gaap-danger);
+  color: var(--gaap-gray-700);
+}
+
+.gaap-alert-info {
+  background: rgba(14, 165, 233, 0.1);
+  border-left-color: var(--gaap-info);
+  color: var(--gaap-gray-700);
+}
+
+/* =======================
+   Loading States
+   ======================= */
+.gaap-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gaap-space-2);
+}
+
+.gaap-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--gaap-gray-200);
+  border-top: 2px solid var(--gaap-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.gaap-skeleton {
+  background: linear-gradient(90deg, var(--gaap-gray-200) 25%, var(--gaap-gray-100) 50%, var(--gaap-gray-200) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--gaap-radius);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* =======================
+   Tables
+   ======================= */
+.gaap-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--gaap-white);
+  border-radius: var(--gaap-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--gaap-shadow);
+}
+
+.gaap-table thead {
+  background: var(--gaap-gray-50);
+}
+
+.gaap-table th,
+.gaap-table td {
+  padding: var(--gaap-space-3) var(--gaap-space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--gaap-gray-200);
+}
+
+.gaap-table th {
+  font-weight: 600;
+  color: var(--gaap-gray-900);
+  font-size: var(--gaap-text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gaap-table tbody tr:hover {
+  background: var(--gaap-gray-50);
+}
+
+.gaap-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =======================
+   Progress Indicators
+   ======================= */
+.gaap-progress {
+  width: 100%;
+  height: 8px;
+  background: var(--gaap-gray-200);
+  border-radius: var(--gaap-radius-full);
+  overflow: hidden;
+}
+
+.gaap-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gaap-primary), var(--gaap-primary-light));
+  border-radius: var(--gaap-radius-full);
+  transition: width var(--gaap-transition-normal);
+}
+
+/* =======================
+   Tooltips
+   ======================= */
+.gaap-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.gaap-tooltip-content {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gaap-gray-900);
+  color: var(--gaap-white);
+  padding: var(--gaap-space-2) var(--gaap-space-3);
+  border-radius: var(--gaap-radius);
+  font-size: var(--gaap-text-xs);
+  white-space: nowrap;
+  z-index: var(--gaap-z-tooltip);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--gaap-transition-fast);
+}
+
+.gaap-tooltip:hover .gaap-tooltip-content {
+  opacity: 1;
+}
+
+.gaap-tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--gaap-gray-900);
+}
+
+/* =======================
+   Modal System
+   ======================= */
+.gaap-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: var(--gaap-z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--gaap-transition-normal);
+}
+
+.gaap-modal-overlay.active {
+  opacity: 1;
+}
+
+.gaap-modal {
+  background: var(--gaap-white);
+  border-radius: var(--gaap-radius-xl);
+  box-shadow: var(--gaap-shadow-xl);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  transform: scale(0.9);
+  transition: transform var(--gaap-transition-normal);
+}
+
+.gaap-modal-overlay.active .gaap-modal {
+  transform: scale(1);
+}
+
+.gaap-modal-header {
+  padding: var(--gaap-space-6);
+  border-bottom: 1px solid var(--gaap-gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gaap-modal-title {
+  font-size: var(--gaap-text-xl);
+  font-weight: 600;
+  margin: 0;
+}
+
+.gaap-modal-close {
+  background: none;
+  border: none;
+  font-size: var(--gaap-text-xl);
+  color: var(--gaap-gray-400);
+  cursor: pointer;
+  padding: var(--gaap-space-2);
+  border-radius: var(--gaap-radius);
+  transition: all var(--gaap-transition-fast);
+}
+
+.gaap-modal-close:hover {
+  background: var(--gaap-gray-100);
+  color: var(--gaap-gray-700);
+}
+
+.gaap-modal-content {
+  padding: var(--gaap-space-6);
+  overflow-y: auto;
+}
+
+.gaap-modal-footer {
+  padding: var(--gaap-space-4) var(--gaap-space-6);
+  background: var(--gaap-gray-50);
+  border-top: 1px solid var(--gaap-gray-200);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--gaap-space-3);
+}
+
+/* =======================
+   Responsive Design
+   ======================= */
+@media (max-width: 1024px) {
+  .gaap-admin-wrap {
+    padding: var(--gaap-space-4);
+  }
+  
+  .gaap-admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gaap-space-4);
+  }
+}
+
+@media (max-width: 768px) {
+  .gaap-chat-container {
+    border-radius: 0;
+    box-shadow: none;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .gaap-chat-messages {
+    height: 300px;
+  }
+  
+  .gaap-message-bubble {
+    max-width: 90%;
+  }
+  
+  .gaap-modal {
+    width: 95%;
+    border-radius: var(--gaap-radius-lg);
+  }
+  
+  .gaap-admin-title {
+    font-size: var(--gaap-text-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .gaap-space-responsive {
+    padding: var(--gaap-space-3);
+  }
+  
+  .gaap-card-header,
+  .gaap-card-content {
+    padding: var(--gaap-space-4);
+  }
+  
+  .gaap-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .gaap-chat-input-group {
+    flex-direction: column;
+  }
+  
+  .gaap-chat-send-btn,
+  .gaap-voice-btn {
+    width: 100%;
+    height: auto;
+    min-width: auto;
+  }
+}
+
+/* =======================
+   Accessibility
+   ======================= */
+
+/* Focus styles for keyboard navigation */
+.gaap-container *:focus-visible {
+  outline: 2px solid var(--gaap-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --gaap-gray-100: #e5e5e5;
+    --gaap-gray-200: #cccccc;
+    --gaap-gray-300: #999999;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Screen reader only content */
+.gaap-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =======================
+   Print Styles
+   ======================= */
+@media print {
+  .gaap-container {
+    color: black;
+    background: white;
+  }
+  
+  .gaap-btn,
+  .gaap-chat-input-area,
+  .gaap-modal-overlay {
+    display: none;
+  }
+  
+  .gaap-card {
+    border: 1px solid black;
+    box-shadow: none;
+  }
+}
+
+/* =======================
+   Dark Mode Support (Future Implementation)
+   ======================= */
+@media (prefers-color-scheme: dark) {
+  /* Dark mode variables will be implemented in future version */
+  .gaap-container[data-theme="dark"] {
+    /* Dark theme implementation */
+  }
+}
+
+/* =======================
+   Custom Scrollbar
+   ======================= */
+.gaap-chat-messages::-webkit-scrollbar,
+.gaap-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gaap-chat-messages::-webkit-scrollbar-track,
+.gaap-modal-content::-webkit-scrollbar-track {
+  background: var(--gaap-gray-100);
+  border-radius: var(--gaap-radius-full);
+}
+
+.gaap-chat-messages::-webkit-scrollbar-thumb,
+.gaap-modal-content::-webkit-scrollbar-thumb {
+  background: var(--gaap-gray-300);
+  border-radius: var(--gaap-radius-full);
+}
+
+.gaap-chat-messages::-webkit-scrollbar-thumb:hover,
+.gaap-modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--gaap-gray-400);
+}
+
+/* =======================
+   Animation Library
+   ======================= */
+.gaap-animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.gaap-animate-slideUp {
+  animation: slideUp 0.4s ease-out;
+}
+
+.gaap-animate-bounceIn {
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =======================
+   Utility Classes
+   ======================= */
+.gaap-text-center { text-align: center; }
+.gaap-text-right { text-align: right; }
+.gaap-text-left { text-align: left; }
+
+.gaap-font-bold { font-weight: 700; }
+.gaap-font-semibold { font-weight: 600; }
+.gaap-font-medium { font-weight: 500; }
+
+.gaap-text-primary { color: var(--gaap-primary); }
+.gaap-text-secondary { color: var(--gaap-secondary); }
+.gaap-text-success { color: var(--gaap-accent); }
+.gaap-text-warning { color: var(--gaap-warning); }
+.gaap-text-danger { color: var(--gaap-danger); }
+
+.gaap-bg-primary { background-color: var(--gaap-primary); }
+.gaap-bg-success { background-color: var(--gaap-accent); }
+.gaap-bg-warning { background-color: var(--gaap-warning); }
+.gaap-bg-danger { background-color: var(--gaap-danger); }
+
+.gaap-rounded { border-radius: var(--gaap-radius); }
+.gaap-rounded-lg { border-radius: var(--gaap-radius-lg); }
+.gaap-rounded-full { border-radius: var(--gaap-radius-full); }
+
+.gaap-shadow { box-shadow: var(--gaap-shadow); }
+.gaap-shadow-lg { box-shadow: var(--gaap-shadow-lg); }
+.gaap-shadow-none { box-shadow: none; }
+
+.gaap-hidden { display: none; }
+.gaap-visible { display: block; }
+
+.gaap-flex { display: flex; }
+.gaap-inline-flex { display: inline-flex; }
+.gaap-grid { display: grid; }
+
+.gaap-items-center { align-items: center; }
+.gaap-items-start { align-items: flex-start; }
+.gaap-items-end { align-items: flex-end; }
+
+.gaap-justify-center { justify-content: center; }
+.gaap-justify-between { justify-content: space-between; }
+.gaap-justify-end { justify-content: flex-end; }
+
+.gaap-w-full { width: 100%; }
+.gaap-h-full { height: 100%; }
+
+.gaap-m-0 { margin: 0; }
+.gaap-mt-2 { margin-top: var(--gaap-space-2); }
+.gaap-mb-4 { margin-bottom: var(--gaap-space-4); }
+.gaap-ml-2 { margin-left: var(--gaap-space-2); }
+.gaap-mr-2 { margin-right: var(--gaap-space-2); }
+
+.gaap-p-4 { padding: var(--gaap-space-4); }
+.gaap-pt-2 { padding-top: var(--gaap-space-2); }
+.gaap-pb-4 { padding-bottom: var(--gaap-space-4); }
+.gaap-pl-2 { padding-left: var(--gaap-space-2); }
+.gaap-pr-2 { padding-right: var(--gaap-space-2); }
+
+/* End of CSS Framework */
