@@ -61,6 +61,9 @@ class Grant_AI_Assistant {
      * コンストラクタ - プライベートでシングルトンを保証
      */
     private function __construct() {
+        // 必要ファイルの読み込み
+        $this->load_dependencies();
+        
         // システム要件チェック
         if (!$this->meets_requirements()) {
             return;
@@ -79,6 +82,27 @@ class Grant_AI_Assistant {
             add_action('admin_init', array($this, 'admin_init'));
             add_action('admin_menu', array($this, 'add_admin_menu'));
             add_action('admin_notices', array($this, 'admin_notices'));
+        }
+    }
+    
+    /**
+     * 依存ファイル読み込み
+     */
+    private function load_dependencies() {
+        // インクルードファイル
+        $includes = array(
+            'includes/ai-engine.php',
+            'includes/ai-chat-section.php'
+        );
+        
+        foreach ($includes as $include) {
+            $file_path = GAA_PLUGIN_PATH . $include;
+            if (file_exists($file_path)) {
+                require_once $file_path;
+            } else {
+                $this->errors['missing_files'][] = $include;
+                add_action('admin_notices', array($this, 'missing_file_notice'));
+            }
         }
     }
     
@@ -819,6 +843,20 @@ class Grant_AI_Assistant {
             printf(
                 '<div class="notice notice-error"><p><strong>Grant AI Assistant:</strong> %s: %s</p></div>',
                 __('以下の依存関係が不足しています', GAA_TEXT_DOMAIN),
+                esc_html($missing)
+            );
+        }
+    }
+    
+    /**
+     * ファイル不足エラー通知
+     */
+    public function missing_file_notice() {
+        if (isset($this->errors['missing_files'])) {
+            $missing = implode(', ', $this->errors['missing_files']);
+            printf(
+                '<div class="notice notice-error"><p><strong>Grant AI Assistant:</strong> %s: %s</p></div>',
+                __('以下の必要なファイルが見つかりません', GAA_TEXT_DOMAIN),
                 esc_html($missing)
             );
         }

@@ -455,3 +455,6 @@ class Grant_AI_Chat_Section {
         <?php
     }
 }
+
+// ショートコード登録
+add_shortcode('grant_ai_chat', array('Grant_AI_Chat_Section', 'render_shortcode'));

@@ -1266,3 +1266,7 @@ JSON形式:
         }
     }
 }
+
+// AJAX アクションフック登録
+add_action('wp_ajax_gaa_handle_chat', array('Grant_AI_Engine', 'handle_chat_message'));
+add_action('wp_ajax_nopriv_gaa_handle_chat', array('Grant_AI_Engine', 'handle_chat_message'));
