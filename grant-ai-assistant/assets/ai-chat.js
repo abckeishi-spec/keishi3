@@ -379,6 +379,20 @@ class GAAChat {
             suggestionsCount: response.suggestions?.length || 0,
             searchInfo: response.search_info
         });
+
+        // レコメンドを保存（検索結果を関連として連携）
+        try {
+            const ids = (response.grants || []).map(g => g.id);
+            const keywords = (response.intent?.search_keywords || []);
+            if (ids.length > 0) {
+                const formData = new FormData();
+                formData.append('action', 'gaa_save_recs');
+                formData.append('nonce', gaa_ajax.nonce);
+                formData.append('ids', ids.join(','));
+                formData.append('keywords', keywords.join(','));
+                fetch(gaa_ajax.ajax_url, { method: 'POST', body: formData }).catch(() => {});
+            }
+        } catch (err) {}
     }
 
     /**

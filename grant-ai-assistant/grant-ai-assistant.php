@@ -188,7 +188,8 @@ class Grant_AI_Assistant {
         $required_files = array(
             'includes/ai-engine.php',
             'includes/ai-chat-section.php',
-            'includes/analytics.php'
+            'includes/analytics.php',
+            'includes/recommendations.php'
         );
 
         $missing = array();
