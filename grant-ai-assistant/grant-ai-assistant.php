@@ -76,6 +76,10 @@ class Grant_AI_Assistant {
         // プラグインライフサイクルフック
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
+
+        // クリック計測用 AJAX（未ログインも可）
+        add_action('wp_ajax_gaa_click', array('GAA_Analytics', 'handle_click_ajax'));
+        add_action('wp_ajax_nopriv_gaa_click', array('GAA_Analytics', 'handle_click_ajax'));
         
         // 管理画面フック
         if (is_admin()) {
@@ -183,7 +187,8 @@ class Grant_AI_Assistant {
     private function load_dependencies() {
         $required_files = array(
             'includes/ai-engine.php',
-            'includes/ai-chat-section.php'
+            'includes/ai-chat-section.php',
+            'includes/analytics.php'
         );
 
         $missing = array();
@@ -864,6 +869,11 @@ class Grant_AI_Assistant {
         add_option('gaa_enable_chat', false); // デフォルトは無効（セキュリティ重視）
         add_option('gaa_max_results', 6);
         add_option('gaa_debug_mode', false);
+
+        // 分析用テーブル作成
+        if (class_exists('GAA_Analytics')) {
+            GAA_Analytics::maybe_create_tables();
+        }
         
         // 有効化ログ
         $this->log_message('Plugin activated successfully', 'info');

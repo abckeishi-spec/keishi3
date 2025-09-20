@@ -106,11 +106,19 @@ class Grant_AI_Engine {
                 );
             }
             
-            // 成功ログ
+            // 成功ログ＋計測
             self::log_success('Chat message processed successfully', array(
                 'grants_found' => count($matching_grants),
                 'processing_time' => $response['search_info']['processing_time']
             ));
+            if (class_exists('GAA_Analytics')) {
+                GAA_Analytics::log_event('chat', array(
+                    'query' => $input_data['message'],
+                    'intent' => isset($ai_analysis['intent']) ? $ai_analysis['intent'] : array(),
+                    'grants_found' => count($matching_grants)
+                ));
+                GAA_Analytics::increment_daily_metric('chats', 1);
+            }
             
             wp_send_json_success($response);
             

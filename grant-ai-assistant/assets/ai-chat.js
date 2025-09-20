@@ -112,7 +112,19 @@ class GAAChat {
         this.resultsArea?.addEventListener('click', (e) => {
             const card = e.target.closest('[data-post-id]');
             if (card) {
-                this.trackCardClick(card.dataset.postId);
+                const postId = card.dataset.postId;
+                const score = card.dataset.score || '';
+                this.trackCardClick(postId);
+                // 計測APIへ非同期送信
+                try {
+                    const formData = new FormData();
+                    formData.append('action', 'gaa_click');
+                    formData.append('nonce', gaa_ajax.nonce);
+                    formData.append('post_id', postId);
+                    formData.append('score', score);
+                    formData.append('query', this.conversationHistory?.slice(-1)[0]?.content || '');
+                    fetch(gaa_ajax.ajax_url, { method: 'POST', body: formData }).catch(() => {});
+                } catch (err) {}
             }
         });
 
